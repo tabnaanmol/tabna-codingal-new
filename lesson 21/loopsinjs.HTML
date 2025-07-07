@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Cat Breeds with Images</title>
+  <style>
+    .cat-entry {
+      display: flex;
+      align-items: center;
+      margin-bottom: 10px;
+    }
+    .cat-entry img {
+      width: 100px;
+      height: auto;
+      margin-left: 15px;
+      border-radius: 8px;
+    }
+  </style>
+</head>
+<body>
+
+<h2>JavaScript For Loop - Cat Breeds with Images</h2>
+
+<div id="demo"></div>
+
+<script>
+  var breeds = ["Siamese cat", "British Shorthair", "Maine Coon", "calico", "Ragdoll", "persian cat"];
+  var images = [
+    "https://encrypted-tbn1.gstatic.com/images?q=tbn:ANd9GcRKF3ALnNHqTH_w3B6WOYDPPlLKCk0llmzkujXv3S9HiUvSsSuT6aAO4kQz9xrh720S3XbHlqymj4bFhWtt4t3JfT9IvfsamK2fmGu5IYYZLw",
+    "https://encrypted-tbn2.gstatic.com/images?q=tbn:ANd9GcTL_PtPm4C_BFePx3Gcm3XVm0Y-xK1M62K-ZMY-Npsm02f6hmhPOpSRTKSDA3ZzHDwP3NAHKmCUuz42z_7JLqIbFNeraYmgzJa48wV7WBupvA",
+    "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTPpm3ZBI2bhtJtZdvOVjCNTgZvxN--z-cp1vH2Zl_h5GVOXWQlEokjKc8&s",
+    "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRbqj_4icuWRnnQl9l3I9N6kLy0ZAEGM1DohPlBYXjvqggdj9pqGwuEZ6Xp74Eh1l4jIA0QvM1BmDlakyv3VSN_Qk4bBtpiNP9B03it-k2w",
+    "https://encrypted-tbn3.gstatic.com/images?q=tbn:ANd9GcQvuDRDoof-ECzQW3GtPAW7omfam6AGzHsw6j9pv0BqQ3YOiwan6Vdq0IPmEIF2HnakWHvrwKAND3mqdtKP5ff8jFqYu8BpelliahmQkq_RVA",
+    "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSB15cW1QEtTh40dzgE6WGzC3O7ROmY6aIUgTKIumtfZw1vXKAdKDgX7l4&s"
+  ];
+
+  var output = "";
+
+  for (var i = 0; i < breeds.length; i++) {
+    output += "<div class='cat-entry'>" + breeds[i] + 
+              "<img src='" + images[i] + "' alt='" + breeds[i] + "'></div>";
+  }
+
+  document.getElementById("demo").innerHTML = output;
+</script>
+
+</body>
+</html>
