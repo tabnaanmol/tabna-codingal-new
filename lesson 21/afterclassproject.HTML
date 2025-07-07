@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Random Number Project</title>
+</head>
+<body>
+
+<h2>JavaScript Random Number Project</h2>
+<pre id="output"></pre>
+
+<script>
+  const output = document.getElementById("output");
+  output.innerHTML += "Random Set of Numbers:\n";
+  for (let i = 0; i < 5; i++) {
+    let randomNum = Math.floor(Math.random() * 100) + 1; 
+    output.innerHTML += randomNum + "\n";
+  }
+
+  output.innerHTML += "\n";
+
+  const currentDate = new Date();
+  output.innerHTML += "Current Date:\n";
+  output.innerHTML += currentDate.toDateString() + "\n";
+
+  output.innerHTML += "\n";
+
+ 
+  const rawRandom = Math.random() * 10; 
+  const roundedRandom = Math.round(rawRandom);
+  output.innerHTML += "Rounded Random Number (0 to 10):\n";
+  output.innerHTML += roundedRandom + "\n";
+
+</script>
+
+</body>
+</html>
