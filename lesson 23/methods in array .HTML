@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+
+<html>
+
+<body>
+
+<h2>JavaScript Arrays</h2>
+
+<h2>join() and pop()</h2>
+
+<p>The join() method joins array elements into a string and the pop() method remones the last element from an array.</p>
+
+
+<p id="myjoin"></p>
+
+<p id="myfirstpop"></p>
+
+<p id="mysecondpop"></p>
+
+<script>
+
+var sports = ["Basketball","badminton","cricket","hockey","polo"];
+
+
+document.getElementById("myjoin").innerHTML = sports.join(" _ ");
+
+document.getElementById("myfirstpop").innerHTML = sports;
+
+sports.pop();
+
+document.getElementById("mysecondpop").innerHTML = sports
+
+</script>
+
+</body>
+
+</html>
