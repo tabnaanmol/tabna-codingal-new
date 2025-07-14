@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Space Explorer's Club</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #001117;
+            color: #C9D109;
+        }
+
+        h1 {
+            color: #58A6FF;
+        }
+
+        /* Attribute Selector */
+        a {
+            color: #88949E;
+            text-decoration: none;
+        }
+
+        a:hover {
+            color: #1F6FEB;
+        }
+
+        /* Child Selector */
+        ul > li {
+            font-weight: bold;
+        }
+
+        /* Sibling Selector */
+        h1 + p {
+            background-color: #161822;
+            padding: 10px;
+            border-radius: 5px;
+        }
+
+        /* :hover Pseudo-class */
+        ul li:hover {
+            color: #4F8CC9;
+        }
+
+        /* :nth-child(n) Pseudo-class */
+        ul li:nth-child(3) {
+            background-color: #212620;
+        }
+
+        /* :not(selector) Pseudo-class */
+        p:not(:first-of-type) {
+            text-decoration: underline;
+        }
+
+        /* ::before Pseudo-element */
+        ul li::before {
+            content: "";
+        }
+
+        /* ::after Pseudo-element */
+        a::after {
+            content: "";
+        }
+
+        /* ::first-letter Pseudo-element */
+        p::first-letter {
+            font-size: 200%;
+            color: #FF7B72;
+        }
+    </style>
+</head>
+<body>
+    <h1>Welcome to the Space Explorer's Club</h1>
+
+    <ul>
+        <li>Moon Missions</li>
+        <li>Mars Rovers</li>
+        <li>International Space Station</li>
+        <li>Telescopes and Stars</li>
+        <li>Black Holes Mysteries</li>
+    </ul>
+
+    <p>Space exploration has always captivated human imagination. It's a journey to the unknown!</p>
+    <p>From the Moon to distant galaxies, we continue to explore the vastness of space.</p>
+
+    <a href="#">Join our Mission</a><br>
+    <a href="#">Latest Space News</a><br>
+    <a href="#">Gallery of the Universe</a>
+</body>
+</html>
