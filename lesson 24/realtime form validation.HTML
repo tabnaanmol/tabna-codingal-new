@@ -4,44 +4,95 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-</head>
+    <title>Styled Registration Form</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: #f0f4f8;
+            color: #333;
+        }
 
-<body>
-    <center>
-        <h1>Sign up Page</h1>
-        <hr><br><br>
-        <fieldset>
-            <legend>personal information</legend>
-            <form>
-                <label for="">Name : </label>
-                <input type="text" placeholder="Enter your name"><br><br>
-                <label for="">Password : </label>
-                <input type="password" placeholder="Enter your password"><br><br>
-                <label for="">Select Skills: </label>
-                <input type="checkbox"> <i>HTML</i>
-                <input type="checkbox"> <i>CSS</i>
-                <input type="checkbox"><i>JavaScript<i> <br><br>
-                        <label for="">Select Gender : </label>
-                        <input type="radio" name="Gender"> <i>Male</i>
-                        <input type="radio" name="Gender"> <i>Female</i>
-                        <input type="radio" name="Gender"> <i>Other</i><br><br>
-                        <select>
-                            <option>IIT Bombay</option>
-                            <option>IIT Delhi</option>
-                            <option>MIT Bhopal</option>
-                        </select><br><Br>
-                        <button>sign up</button>
-            </form>
-        </fieldset>
-        <br><br>
-        <hr>
-        <h1>Registration Form</h1>
+        h1 {
+            color: #0066cc;
+            font-size: 36px;
+        }
+
+        fieldset {
+            border: 2px solid #0066cc;
+            border-radius: 10px;
+            padding: 20px;
+            margin: 20px;
+            background: #ffffff;
+        }
+
+        legend {
+            font-weight: bold;
+            color: #0066cc;
+            font-size: 18px;
+        }
+
+        label {
+            font-weight: 500;
+            font-size: 16px;
+        }
+
+        input[type="text"],
+        input[type="email"],
+        input[type="tel"],
+        input[type="date"],
+        input[type="password"],
+        input[type="number"],
+        select,
+        textarea {
+            width: 60%;
+            padding: 8px;
+            margin-top: 5px;
+            margin-bottom: 15px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            font-size: 15px;
+        }
+
+        textarea {
+            resize: vertical;
+        }
+
+        button {
+            background-color: #0066cc;
+            color: white;
+            padding: 12px 25px;
+            margin: 10px;
+            border: none;
+            border-radius: 6px;
+            font-size: 16px;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+
+        button:hover {
+            background-color: #004999;
+        }
+
+        center {
+            padding: 20px;
+        }
+
+        hr {
+            width: 80%;
+            border: 1px solid #0066cc;
+        }
+    </style>
+</head>
+</html>
+<body> <center>
+    <h1>Registration Form</h1>
+ <HR>
         <fieldset>
             <legend>Personal Information</legend>
 
             <label for="">First Name : </label>
-            <input type="text" placeholder="Enter your name"><br><br>
+            <input type="text" placeholder="Enter your name">
+            <br><br>
 
             <label for=""> Last Name : </label>
             <input type="text" placeholder="Enter your name"><br><br>
@@ -49,7 +100,7 @@
             <label for="dob">Date of Birth:</label>
             <input type="date"><br><br>
 
-          <label for="gender">Select Gender : </label>
+             <label for="gender">Select Gender : </label>
                         <input type="radio" name="Gender"> <i>Male</i>
                         <input type="radio" name="Gender"> <i>Female</i>
                         <input type="radio" name="Gender"> <i>Other</i><br><br>
@@ -343,179 +394,7 @@
         <button>Reset</button>
         </form>
         <br><br>
-        <hr>
-        <h1>Apply for a Position</h1>
-        <fieldset>
-            <legend>Applicant Details</legend>
-
-            <label for="fullname">Full Name:</label><br>
-            <input type="text" placeholder="Enter your Full Name"><br><br>
-
-            <label for="email">Email Address:</label><br>
-            <input type="email" placeholder="Enter your Email Address"><br><br>
-
-            <label for="phone">Contact Number:</label><br>
-            <input type="tel" placeholder="Enter your Contact Number"><br><br>
-
-            <label for="linkedin">LinkedIn Profile (optional):</label><br>
-            <input type="url" placeholder="Enter your LinkedIn Profile"><br><br>
-        </fieldset>
-        <fieldset>
-            <legend>Position Information</legend>
-
-            <label for="position">Position You're Applying For:</label><br>
-            <input type="text" placeholder="Enter your Position You're Applying For"><br><br>
-
-            <label for="experience">Years of Experience:</label><br>
-            <select>
-                <option value="">--Select--</option>
-                <option value="0">0 - Entry Level</option>
-                <option value="1">1-2 Years</option>
-                <option value="3">3-5 Years</option>
-                <option value="6">6+ Years</option>
-            </select><br><br>
-
-            <label for="relocate">Willing to Relocate?</label><br>
-            <input type="radio" value="yes"> Yes
-            <input type="radio" value="no"> No<br><br>
-
-        </fieldset>
-
-        <fieldset>
-            <legend>Resume & Cover Letter</legend>
-
-            <label for="resume">Upload Resume:</label><br><br>
-            <button>Choose file</button><br><br>
-
-            <label for="cover">Cover Letter:</label><br>
-            <textarea rows="6" cols="50" placeholder="Write a short cover letter..."></textarea><br><br>
-        </fieldset>
-
-        <fieldset>
-            <legend>References</legend>
-
-            <label for="refname">Reference Name:</label><br>
-            <input type="text" placeholder="Enter your Reference Name"><br><br>
-
-            <label for="refcontact">Reference Contact Info:</label><br>
-            <input type="text" placeholder="Enter your Reference Contact"><br><br>
-        </fieldset>
-
-        <label>
-            <input type="checkbox">
-            I confirm that all information provided is accurate.
-        </label><br><br>
-        <button>Submit Application</button>
-        <button>Reset</button>
-        </form>
-        <br><br>
-        <hr>
-        <h1>University Admission Application Form</h1>
-
-        <fieldset>
-            <legend>Personal Information</legend>
-
-            <label for="full-name">Full Name:</label><input type="text" placeholder="Enter your Full Name "
-                required><br><br>
-
-            <label for="dob">Date of Birth:</label>
-            <input type="date"><br><br>
-
-            <label for="nationality">Nationality:</label>
-            <input type="text" placeholder="Enter your nationality"><br><br>
-
-            <label for="email">Email Address:</label>
-            <input type="email" placeholder="Enter your Email Address"><br><br>
-
-            <label for="phone">Phone Number:</label>
-            <input type="tel" placeholder="Enter your Phone Number"><br><br>
-
-            <label for="gender">Gender:</label>
-            <input type="radio" value="male"> Male
-            <input type="radio" value="female"> Female
-            <input type="radio" value="other"> Other<br><br>
-        </fieldset>
-
-        <fieldset>
-            <legend>Academic Background</legend>
-
-            <label for="highschool">High School Name:</label><br>
-            <input type="text" placeholder="Enter your High School Name"><br><br>
-
-            <label for="graduation-year">Year of Graduation:</label><br>
-            <input type="number" placeholder="Enter your Year of Graduation"><br><br>
-
-            <label for="grades">Final Grades/Percentage:</label>
-            <input type="text" placeholder="Enter your Final Grades/Percentage"><br><br>
-
-            <label for="exams">Standardized Exams Taken:</label><br>
-            <input type="checkbox" value="sat"> SAT
-            <input type="checkbox" value="act"> ACT
-            <input type="checkbox" value="ielts"> IELTS
-            <input type="checkbox" value="toefl"> TOEFL
-            <input type="checkbox" value="none"> None<br><br>
-        </fieldset>
-
-        <fieldset>
-            <legend>Program Selection</legend>
-
-            <label for="faculty">Faculty:</label><br>
-            <select>
-                <option value="">-- Select Faculty --</option>
-                <option value="engineering">Engineering</option>
-                <option value="sciences">Sciences</option>
-                <option value="business">Business</option>
-                <option value="arts">Arts & Humanities</option>
-                <option value="law">Law</option>
-            </select><br><br>
-
-            <label for="program">Intended Program:</label>
-            <input type="text" placeholder="Enter your Intended Program"><br><br>
-
-            <label for="start-term">Preferred Start Term:</label>
-            <select>
-                <option value="fall">Fall</option>
-                <option value="spring">Spring</option>
-                <option value="summer">Summer</option>
-            </select><br><br>
-        </fieldset>
-
-        <fieldset>
-            <legend>Required Documents</legend>
-
-            <label for="transcript">Upload High School Transcript (PDF):</label><br>
-            <button>choose File</button><br><br>
-
-            <label for="photo">Upload Passport Size Photo:</label><br>
-            <button>choose File</button><br><br>
-
-            <label for="id-doc">Upload National ID/Passport:</label><br>
-            <button>choose File</button><br><br>
-
-        </fieldset>
-
-        <fieldset>
-            <legend>Declaration</legend>
-
-            <label>
-                <input type="checkbox">
-                I hereby declare that the information provided is true and complete.
-            </label><br><br>
-        </fieldset>
-        <button>Submit Application</button>
-        <button>Reset Form</button>
-        </form>
-
-</body>
-
-</html>
-
-</body>
-
-</html>
-
-
-</center>
+        </center>
 </body>
 
 </html>
