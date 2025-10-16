@@ -1,0 +1,473 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>bracy.boo | Handmade Magic</title>
+
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@500&family=Quicksand:wght@400;600&display=swap');
+
+:root {
+  --bg-dark: #2b2333;
+  --accent: #cbb2ff;
+  --card: #3a2d42;
+  --light: #f2e9e4;
+  --text-light: #e8dcd4;
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; scroll-behavior: smooth; }
+
+body {
+  font-family: 'Quicksand', sans-serif;
+  background-color: var(--bg-dark);
+  color: var(--text-light);
+  overflow-x: hidden;
+}
+
+header {
+  background-color: var(--card);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 15px 40px;
+  position: sticky;
+  top: 0;
+  z-index: 10;
+}
+
+header h1 {
+  font-family: 'Cinzel', serif;
+  font-size: 1.8rem;
+  color: var(--light);
+}
+
+nav button {
+  background: none;
+  border: 2px solid var(--accent);
+  border-radius: 20px;
+  padding: 8px 15px;
+  margin: 0 5px;
+  color: var(--accent);
+  cursor: pointer;
+  font-weight: bold;
+  transition: 0.3s;
+}
+nav button:hover {
+  background: var(--accent);
+  color: var(--bg-dark);
+}
+
+.cart-btn {
+  background: var(--accent);
+  color: var(--bg-dark);
+  border: none;
+  border-radius: 20px;
+  padding: 8px 15px;
+  cursor: pointer;
+  font-weight: bold;
+}
+
+.hero {
+  text-align: center;
+  padding: 70px 20px;
+  background: linear-gradient(to bottom, #3b2f45, #2b2333);
+}
+
+.hero h2 {
+  font-family: 'Cinzel', serif;
+  font-size: 2.4rem;
+  color: var(--light);
+}
+
+.hero p {
+  color: #d8c5ff;
+  max-width: 600px;
+  margin: 10px auto;
+}
+
+.section {
+  padding: 60px 20px;
+  text-align: center;
+}
+
+.section h2 {
+  font-family: 'Cinzel', serif;
+  color: var(--accent);
+  margin-bottom: 30px;
+}
+
+.product-single {
+  background-color: var(--card);
+  border-radius: 15px;
+  overflow: hidden;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+  max-width: 300px;
+  margin: auto;
+  transition: transform 0.3s ease;
+}
+
+.product-single img {
+  width: 100%;
+  height: 250px;
+  object-fit: cover;
+}
+
+.product-info {
+  padding: 15px;
+}
+
+.product-info h3 {
+  font-family: 'Cinzel', serif;
+  margin-bottom: 5px;
+}
+
+.price {
+  font-weight: bold;
+  color: var(--accent);
+}
+
+.add {
+  background: var(--accent);
+  color: var(--bg-dark);
+  border: none;
+  padding: 8px 15px;
+  border-radius: 20px;
+  cursor: pointer;
+  font-weight: bold;
+  margin-top: 10px;
+  transition: 0.3s;
+}
+
+.add:hover { background: var(--light); }
+
+.slider-buttons {
+  display: flex;
+  justify-content: center;
+  margin-top: 15px;
+  gap: 20px;
+}
+
+.slider-buttons button {
+  background: var(--accent);
+  color: var(--bg-dark);
+  border: none;
+  border-radius: 20px;
+  padding: 8px 15px;
+  cursor: pointer;
+  font-weight: bold;
+}
+
+.modal {
+  display: none;
+  position: fixed;
+  z-index: 20;
+  left:0; top:0;
+  width:100%; height:100%;
+  background: rgba(0,0,0,0.6);
+  justify-content: center;
+  align-items: center;
+}
+
+.modal-content {
+  background-color: var(--card);
+  padding: 30px;
+  border-radius: 15px;
+  width: 90%;
+  max-width: 500px;
+  text-align: left;
+  color: var(--light);
+  position: relative;
+}
+
+.close {
+  position: absolute;
+  top: 15px; right: 20px;
+  cursor: pointer;
+  font-size: 1.3rem;
+}
+
+input, select {
+  width: 100%;
+  margin: 8px 0;
+  padding: 10px;
+  border-radius: 8px;
+  border: none;
+}
+
+button.checkout {
+  width: 100%;
+  background: var(--accent);
+  border: none;
+  color: var(--bg-dark);
+  padding: 10px;
+  border-radius: 8px;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+footer {
+  text-align: center;
+  padding: 25px;
+  color: #bfaee3;
+  border-top: 1px solid #4b3d57;
+  margin-top: 40px;
+}
+
+footer a { color: var(--accent); text-decoration: none; }
+
+.cute-popup {
+  display: none;
+  position: fixed;
+  bottom: 30px;
+  right: 30px;
+  background: var(--accent);
+  color: var(--bg-dark);
+  padding: 15px 25px;
+  border-radius: 25px;
+  font-weight: bold;
+  box-shadow: 0 4px 15px rgba(0,0,0,0.4);
+  z-index: 50;
+  animation: popupAnim 2.5s ease forwards;
+}
+
+@keyframes popupAnim {
+  0% { opacity: 0; transform: translateY(20px);}
+  10% { opacity: 1; transform: translateY(0);}
+  90% { opacity: 1; transform: translateY(0);}
+  100% { opacity: 0; transform: translateY(20px);}
+}
+</style>
+</head>
+<body>
+
+<header>
+  <h1>👻 bracy.boo</h1>
+  <nav>
+    <button onclick="scrollToSection('bestsellers')">Best Sellers</button>
+    <button onclick="scrollToSection('beaded')">Beaded</button>
+    <button onclick="scrollToSection('crochet')">Crochet</button>
+    <button onclick="scrollToSection('about')">About</button>
+    <button onclick="scrollToSection('contact')">Contact</button>
+    <button class="cart-btn" onclick="openCart()">🛒 Cart (<span id="cartCount">0</span>)</button>
+  </nav>
+</header>
+
+<section class="hero">
+  <h2>Handmade with a Hint of Magic ✨</h2>
+  <p>Discover dreamy beaded jewellery, crochet pieces, and magical accessories crafted with love.</p>
+</section>
+
+<!-- Best Sellers -->
+<section id="bestsellers" class="section">
+  <h2>Best Sellers</h2>
+  <div class="product-single" id="bestsellerProduct"></div>
+
+  <div class="slider-buttons">
+    <button onclick="prevProduct('bestsellers')">Previous</button>
+    <button onclick="nextProduct('bestsellers')">Next</button>
+  </div>
+</section>
+
+<!-- Beaded Jewellery -->
+<section id="beaded" class="section">
+  <h2>Beaded Jewellery</h2>
+  <div class="product-single" id="beadedProduct"></div>
+  <div class="slider-buttons">
+    <button onclick="prevProduct('beaded')">Previous</button>
+    <button onclick="nextProduct('beaded')">Next</button>
+  </div>
+</section>
+
+<!-- Crochet -->
+<section id="crochet" class="section">
+  <h2>Crochet Things</h2>
+  <div class="product-single" id="crochetProduct"></div>
+  <div class="slider-buttons">
+    <button onclick="prevProduct('crochet')">Previous</button>
+    <button onclick="nextProduct('crochet')">Next</button>
+  </div>
+</section>
+
+<!-- About -->
+<section id="about" class="section">
+  <h2>About Us</h2>
+  <p>At bracy.boo, we bring imagination to life — every bracelet, necklace, and crochet creation is made by hand with love and a sprinkle of magic.</p>
+</section>
+
+<!-- Contact -->
+<section id="contact" class="section">
+  <h2>Contact Us</h2>
+  <p>Instagram: <a href="https://instagram.com/bracy.boo" target="_blank">@bracy.boo</a></p>
+</section>
+
+<!-- Cart Modal -->
+<div class="modal" id="cartModal">
+  <div class="modal-content">
+    <span class="close" onclick="closeCart()">&times;</span>
+    <h3>Your Cart</h3>
+    <ul id="cartItems"></ul>
+    <p><strong>Total: $<span id="cartTotal">0</span></strong></p>
+    <button class="checkout" onclick="openCheckout()">Proceed to Checkout</button>
+  </div>
+</div>
+
+<!-- Checkout Modal -->
+<div class="modal" id="checkoutModal">
+  <div class="modal-content">
+    <span class="close" onclick="closeCheckout()">&times;</span>
+    <h3>Checkout Details</h3>
+    <input type="text" id="name" placeholder="Full Name" required />
+    <input type="text" id="address" placeholder="Delivery Address" required />
+    <input type="text" id="phone" placeholder="Phone Number" required />
+    <select id="payment">
+      <option>Cash on Delivery</option>
+      <option>Bank Transfer</option>
+      <option>EasyPaisa / JazzCash</option>
+    </select>
+    <button class="checkout" onclick="confirmOrder()">Confirm Order</button>
+  </div>
+</div>
+
+<div class="cute-popup" id="cutePopup">Thank you for your order 💜🎉</div>
+
+<footer>
+  <p>✨ bracy.boo | Handmade with Love ✨<br>© 2025 All Rights Reserved</p>
+</footer>
+
+<script>
+// Smooth scroll for header buttons
+function scrollToSection(id){
+  document.getElementById(id).scrollIntoView({ behavior: 'smooth' });
+}
+
+// Cart
+let cart = [];
+let total = 0;
+
+function addToCart(name, price){
+  cart.push({name, price});
+  total += price;
+  document.getElementById('cartCount').textContent = cart.length;
+  showPopup('Added to cart 🛍️');
+}
+
+function openCart(){
+  const cartList = document.getElementById('cartItems');
+  cartList.innerHTML = '';
+  cart.forEach(item => {
+    const li = document.createElement('li');
+    li.textContent = `${item.name} - ${item.price}`;
+    cartList.appendChild(li);
+  });
+  document.getElementById('cartTotal').textContent = total;
+  document.getElementById('cartModal').style.display = 'flex';
+}
+
+function closeCart(){ document.getElementById('cartModal').style.display = 'none'; }
+
+function openCheckout(){ closeCart(); document.getElementById('checkoutModal').style.display = 'flex'; }
+function closeCheckout(){ document.getElementById('checkoutModal').style.display = 'none'; }
+
+function confirmOrder(){
+  const name = document.getElementById('name').value;
+  const address = document.getElementById('address').value;
+  const phone = document.getElementById('phone').value;
+  if(!name || !address || !phone){ alert('Please fill all fields!'); return; }
+  cart = []; total = 0; document.getElementById('cartCount').textContent = 0;
+  closeCheckout();
+  showPopup('Thank you for your order 💜🎉');
+}
+
+// Cute popup function
+function showPopup(msg){
+  const popup = document.getElementById('cutePopup');
+  popup.textContent = msg;
+  popup.style.display = 'block';
+  setTimeout(()=> popup.style.display='none', 2500);
+}
+
+// Products
+const bestSellers = [
+  { name: 'floral Necklace set', price:  300, img: 'https://i.pinimg.com/1200x/95/fd/fa/95fdfaf0515221c1c7ea2861a61fd7b7.jpg' },
+  { name: 'floral earring set of 3', price: 200, img: 'https://i.pinimg.com/1200x/01/13/39/011339bce4834b6581230490e0d9b7a2.jpg' },
+  { name: 'Bag', price: 999, img: 'https://i.pinimg.com/736x/7b/53/fb/7b53fb67f1613c7324ddaead926bae5d.jpg' },
+  { name: 'Bouquet', price: 500, img: 'https://i.pinimg.com/736x/cd/08/b2/cd08b2094547b4d5bbe3f87a7ab3894a.jpg' }
+];
+
+
+const beaded = [
+  { name: 'floral Necklace set', price: 300, img: 'https://i.pinimg.com/1200x/95/fd/fa/95fdfaf0515221c1c7ea2861a61fd7b7.jpg' },
+  { name: 'floral earring set of 3', price: 200, img: 'https://i.pinimg.com/1200x/01/13/39/011339bce4834b6581230490e0d9b7a2.jpg' },
+  { name: 'Bow bracelet ', price: 250, img: 'https://i.pinimg.com/1200x/f2/e1/f3/f2e1f3c37cd2dd1a0518407bae6dfff6.jpg' },
+  { name: 'pearl bracelet ', price: 250, img: 'https://i.pinimg.com/736x/98/b9/0c/98b90c2b71138fb61d17235f2e982da4.jpg' },
+  { name: 'frog bracelet ', price: 250, img: 'https://i.pinimg.com/1200x/b0/2b/b2/b02bb2b0e4729ea970540cb7a9cd930b.jpg' },
+  { name: 'floral ring set of 2 ', price: 200, img: 'https://i.pinimg.com/736x/99/3f/df/993fdf970b6a7730b668403c7f2e94bb.jpg' },
+  { name: 'rings set of 4 ', price: 400, img: 'https://i.pinimg.com/736x/90/ad/a9/90ada9ad283027072593e080b591b515.jpg' },
+  { name: 'floral set ', price: 450, img: 'https://i.pinimg.com/736x/04/6d/a9/046da9e7a51328b55d56301b351dc991.jpg' },
+  { name: 'floral bracelet ', price: 180, img: 'https://i.pinimg.com/736x/bc/14/a2/bc14a226f529486ab6ab9005e6f4f77b.jpg' },
+  { name: 'floral bracelet ', price: 180, img: 'https://i.pinimg.com/1200x/a7/6b/c7/a76bc797b5e0a380cbadd1d724cc62f8.jpg' },
+  { name: 'floral bracelet ', price: 180, img: 'https://i.pinimg.com/736x/f3/11/f2/f311f2ee9391b6c53b7763a8fd559020.jpg' },
+  { name: 'floral bracelet set of 3 ', price: 180, img: 'https://i.pinimg.com/736x/1e/71/a5/1e71a5d0031e2bd026f0427216520756.jpg' },
+  { name: 'necklace ', price: 300, img: 'https://i.pinimg.com/736x/92/fc/19/92fc192943e811e1451ac54a6983505b.jpg' },
+  { name: 'necklace ', price: 300, img: 'https://i.pinimg.com/736x/27/6d/48/276d48eb3624fe9f0ddd0edfa2cd7478.jpg' },
+  { name: 'necklace set ', price: 450, img: 'https://i.pinimg.com/736x/ea/57/02/ea5702166ab88686d2b0dd7d75144ce1.jpg' },
+
+];
+
+const crochet = [
+  { name: 'earrings', price: 200, img: 'https://i.pinimg.com/736x/a1/e8/c5/a1e8c5b9ff107af48b83e4d37ef4beec.jpg' },
+  { name: 'bag charm', price: 300, img: 'https://i.pinimg.com/736x/d8/36/4b/d8364bf63bc100fbf852a95318837de2.jpg' },
+  { name: 'keychain', price: 250, img: 'https://i.pinimg.com/736x/46/a0/5d/46a05d3b82660f1a206672646e30da70.jpg' },
+  { name: 'bracelet', price: 300, img: 'https://i.pinimg.com/1200x/dd/74/b9/dd74b93d224d6024b4993a9280f0c1c3.jpg' },
+  { name: 'keychain set of 2', price: 400, img: 'https://i.pinimg.com/736x/44/50/77/445077df921d506a248fbdce7f75ad2f.jpg' },
+  { name: 'keychain set of 2', price: 400, img: 'https://i.pinimg.com/736x/1e/41/61/1e4161a346fd9c45fadcd570fceac467.jpg' },
+  { name: 'keychain set of 3', price: 600, img: 'https://i.pinimg.com/1200x/45/06/05/4506052bf333baf53a41b4d1a17b1318.jpg' },
+  { name: 'keychain set of 3', price: 600, img: 'https://i.pinimg.com/736x/1f/b5/88/1fb588e02488afac5225de3eabd6ecf3.jpg' },
+  { name: 'small sunflower bouquet', price: 300, img: 'https://i.pinimg.com/736x/eb/ab/59/ebab59cfd20ab1c917303e6c39a7dc05.jpg' },
+  { name: 'bag charm', price: 200, img: 'https://i.pinimg.com/1200x/4c/7d/4e/4c7d4e667c71bef82651528d82b56cfc.jpg' },
+  { name: 'bouquet', price: 400, img: 'https://i.pinimg.com/736x/cd/08/b2/cd08b2094547b4d5bbe3f87a7ab3894a.jpg' },
+  { name: 'bouquet', price: 500, img: 'https://i.pinimg.com/1200x/4e/a8/27/4ea8275e94c810aad2baa9e7c183b3a4.jpg' },
+  { name: 'flower pot ', price: 600, img: 'https://i.pinimg.com/736x/da/90/27/da902770d5c86d6e6ac2c4f01c1de1a6.jpg' },
+  { name: 'flower pot', price: 400, img: 'https://i.pinimg.com/736x/45/25/be/4525bea40983a4e70e6af67e1a2a103d.jpg' },
+  { name: 'floral bracelet set of 3', price: 900, img: 'https://i.pinimg.com/1200x/49/85/51/498551d5bb16d76fa690e627e8c23623.jpg' },
+  { name: 'bag', price: 1000, img: 'https://i.pinimg.com/736x/7b/53/fb/7b53fb67f1613c7324ddaead926bae5d.jpg' },
+  { name: 'bag set of 3', price: 3000, img: 'https://i.pinimg.com/736x/1b/8f/30/1b8f30d142e0b563e37089b0c3d84b7f.jpg' },
+  { name: 'bag', price: 900, img: 'https://i.pinimg.com/736x/b5/fd/03/b5fd03503756a86809ea52f17737a93a.jpg' },
+];
+
+let indices = { bestsellers:0, beaded:0, crochet:0 };
+
+function showProduct(section){
+  let data, div;
+  if(section==='bestsellers'){ data=bestSellers; div=document.getElementById('bestsellerProduct'); }
+  if(section==='beaded'){ data=beaded; div=document.getElementById('beadedProduct'); }
+  if(section==='crochet'){ data=crochet; div=document.getElementById('crochetProduct'); }
+  const product = data[indices[section]];
+  div.innerHTML = `
+    <img src="${product.img}" alt="">
+    <div class="product-info">
+      <h3>${product.name}</h3>
+      <p class="price">$${product.price}</p>
+      <button class="add" onclick="addToCart('${product.name}',${product.price})">Add to Cart</button>
+    </div>
+  `;
+}
+
+function nextProduct(section){
+  let data = section==='bestsellers'? bestSellers : section==='beaded'? beaded : crochet;
+  indices[section] = (indices[section]+1) % data.length;
+  showProduct(section);
+}
+
+function prevProduct(section){
+  let data = section==='bestsellers'? bestSellers : section==='beaded'? beaded : crochet;
+  indices[section] = (indices[section]-1 + data.length) % data.length;
+  showProduct(section);
+}
+
+// Initialize first products
+showProduct('bestsellers');
+showProduct('beaded');
+showProduct('crochet');
+</script>

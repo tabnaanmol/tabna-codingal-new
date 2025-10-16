@@ -1,0 +1,184 @@
+// FabricFusion_Shop.jsx // Single-file React component (Tailwind CSS assumed) // Instructions: Replace the placeholder image URLs in the products array // with direct links to the Instagram images or hosted images (e.g. from your server / CDN). // This is a single-page layout with product grid, product quick-view, cart & checkout popup.
+
+import React, { useState } from "react";
+
+const productsInitial = [ { id: 1, title: "Hand-painted Floral Dupatta - Olive", price: 2750, img: "/images/product1.jpg", // REPLACE with Instagram / hosted URL desc: "Lightweight high-quality fabric with hand painted floral motifs.", }, { id: 2, title: "Sunflower Statement Dupatta - Pastel", price: 3000, img: "/images/product2.jpg", desc: "Bright sunflower hand-painted artwork on soft fabric.", }, { id: 3, title: "Custom Name Dupatta - Maroon", price: 2500, img: "/images/product3.jpg", desc: "Personalized Urdu calligraphy option — DM to request custom text.", }, { id: 4, title: "Lilac Vines Dupatta", price: 2900, img: "/images/product4.jpg", desc: "Subtle purple tones with vine patterns and bead detailing.", }, { id: 5, title: "Butterfly Motif Dupatta - Cream", price: 2650, img: "/images/product5.jpg", desc: "Hand-painted butterflies with shaded detailing.", }, { id: 6, title: "Classic Red Dupatta", price: 2800, img: "/images/product6.jpg", desc: "Bold red base with golden brush strokes.", }, ];
+
+export default function FabricFusionShop() { const [products] = useState(productsInitial); const [cart, setCart] = useState([]); const [showCart, setShowCart] = useState(false); const [quickView, setQuickView] = useState(null); const [checkoutDetails, setCheckoutDetails] = useState({ name: "", phone: "", address: "" }); const [orderPlaced, setOrderPlaced] = useState(false);
+
+function addToCart(product) { setCart((c) => { const existing = c.find((x) => x.id === product.id); if (existing) { return c.map((x) => (x.id === product.id ? { ...x, qty: x.qty + 1 } : x)); } return [...c, { ...product, qty: 1 }]; }); }
+
+function updateQty(id, delta) { setCart((c) => c .map((x) => (x.id === id ? { ...x, qty: Math.max(1, x.qty + delta) } : x)) .filter(Boolean) ); }
+
+function removeItem(id) { setCart((c) => c.filter((x) => x.id !== id)); }
+
+const subtotal = cart.reduce((s, p) => s + p.price * p.qty, 0);
+
+function handleCheckoutSubmit(e) { e.preventDefault(); // In real site: send order to your backend or WhatsApp/payment link console.log("ORDER", { cart, checkoutDetails }); setOrderPlaced(true); setCart([]); setShowCart(false); }
+
+return ( <div className="min-h-screen bg-[#0f172a] text-slate-100"> <header className="max-w-6xl mx-auto p-6 flex items-center justify-between"> <div className="flex items-center gap-4"> <div className="w-12 h-12 rounded-full bg-white/10 flex items-center justify-center font-bold text-xl">FF</div> <div> <h1 className="text-2xl font-semibold tracking-tight">Fabric Fusion by Nooray</h1> <p className="text-sm text-slate-300">Hand-painted dupattas • Artistic customization • High-quality fabrics</p> </div> </div>
+
+<div className="flex items-center gap-3">
+      <a
+        href="https://www.instagram.com/fabricfusionbynooray?igsh=aThxM3Vmemd2dDd4"
+        target="_blank"
+        rel="noreferrer"
+        className="px-4 py-2 rounded-md bg-gradient-to-r from-pink-500 to-amber-400 text-slate-900 font-medium"
+      >
+        Instagram
+      </a>
+
+      <button
+        onClick={() => setShowCart(true)}
+        className="px-3 py-2 rounded-md border border-slate-600 hover:bg-white/5"
+      >
+        Cart ({cart.reduce((s, p) => s + p.qty, 0)})
+      </button>
+    </div>
+  </header>
+
+  <main className="max-w-6xl mx-auto p-6">
+    {/* Hero */}
+    <section className="grid grid-cols-1 md:grid-cols-2 gap-6 items-center mb-8">
+      <div className="rounded-2xl overflow-hidden">
+        <img src={products[0].img} alt={products[0].title} className="w-full h-96 object-cover" />
+      </div>
+      <div className="p-6">
+        <h2 className="text-3xl font-bold mb-3">Hand-Painted Dupattas — Limited Pieces</h2>
+        <p className="text-slate-300 mb-4">Each dupatta is lovingly hand-painted on high-quality fabric. Colours and motifs are unique — DM for custom text or requests.</p>
+        <div className="flex gap-3">
+          <button onClick={() => window.scrollTo({ top: 600, behavior: "smooth" })} className="px-5 py-3 rounded bg-amber-400 text-slate-900 font-semibold">Shop Collection</button>
+          <a href="https://www.instagram.com/fabricfusionbynooray?igsh=aThxM3Vmemd2dDd4" target="_blank" rel="noreferrer" className="px-5 py-3 rounded border border-slate-600">View Reviews</a>
+        </div>
+      </div>
+    </section>
+
+    {/* Products Grid */}
+    <section>
+      <h3 className="text-2xl font-semibold mb-4">Our Pieces</h3>
+      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
+        {products.map((p) => (
+          <article key={p.id} className="bg-white/3 rounded-lg overflow-hidden shadow-lg">
+            <div className="relative">
+              <img src={p.img} alt={p.title} className="w-full h-64 object-cover" />
+              <div className="absolute left-3 top-3 bg-amber-400 text-slate-900 px-2 py-1 rounded">PKR {p.price}</div>
+            </div>
+            <div className="p-4">
+              <h4 className="font-semibold text-lg">{p.title}</h4>
+              <p className="text-slate-300 text-sm my-2">{p.desc}</p>
+              <div className="flex gap-2 mt-3">
+                <button onClick={() => setQuickView(p)} className="flex-1 px-3 py-2 rounded bg-white/10">Quick View</button>
+                <button onClick={() => addToCart(p)} className="flex-1 px-3 py-2 rounded bg-amber-400 text-slate-900 font-semibold">Add to Cart</button>
+              </div>
+            </div>
+          </article>
+        ))}
+      </div>
+    </section>
+
+    {/* Footer / Contact */}
+    <footer className="mt-12 border-t border-white/5 pt-8 pb-16">
+      <div className="flex flex-col md:flex-row justify-between items-start gap-6">
+        <div>
+          <h4 className="font-semibold text-lg">Contact</h4>
+          <p className="text-slate-300 mt-2">Orders accepted via Instagram DM. For custom work, mention your preferred colours, text, and measurements in the message.</p>
+          <a href="https://www.instagram.com/fabricfusionbynooray?igsh=aThxM3Vmemd2dDd4" className="mt-3 inline-block font-medium text-amber-300">@fabricfusionbynooray</a>
+        </div>
+
+        <div>
+          <h4 className="font-semibold text-lg">Shipping & Payment</h4>
+          <p className="text-slate-300 mt-2">We ship nationwide. Payment via bank transfer / easypaisa / cash on delivery (if available). Prices shown are approximate and within PKR 2,500 — 3,000.</p>
+        </div>
+      </div>
+    </footer>
+
+  </main>
+
+  {/* Quick View Modal */}
+  {quickView && (
+    <div className="fixed inset-0 bg-black/60 flex items-center justify-center z-40">
+      <div className="bg-[#071025] rounded-xl max-w-3xl w-full p-6">
+        <div className="flex gap-6">
+          <img src={quickView.img} alt={quickView.title} className="w-2/5 h-80 object-cover rounded" />
+          <div className="flex-1">
+            <h3 className="text-2xl font-bold">{quickView.title}</h3>
+            <p className="text-amber-300 font-semibold mt-2">PKR {quickView.price}</p>
+            <p className="text-slate-300 mt-4">{quickView.desc}</p>
+            <div className="mt-6 flex gap-3">
+              <button className="px-4 py-2 rounded bg-amber-400 text-slate-900 font-semibold" onClick={() => { addToCart(quickView); setQuickView(null); }}>
+                Add to Cart
+              </button>
+              <button className="px-4 py-2 rounded border border-slate-600" onClick={() => setQuickView(null)}>Close</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  )}
+
+  {/* Cart / Checkout Modal */}
+  {showCart && (
+    <div className="fixed inset-0 bg-black/60 z-50 flex items-center justify-center">
+      <div className="bg-[#071025] rounded-xl max-w-2xl w-full p-6">
+        <div className="flex justify-between items-center mb-4">
+          <h3 className="text-xl font-semibold">Your Cart</h3>
+          <button className="px-3 py-1 rounded border" onClick={() => setShowCart(false)}>Close</button>
+        </div>
+
+        {cart.length === 0 ? (
+          <div className="text-slate-300">Your cart is empty. Add some lovely dupattas ✨</div>
+        ) : (
+          <div>
+            <ul className="space-y-3">
+              {cart.map((item) => (
+                <li key={item.id} className="flex items-center gap-4 bg-white/2 rounded p-3">
+                  <img src={item.img} alt={item.title} className="w-20 h-20 object-cover rounded" />
+                  <div className="flex-1">
+                    <div className="flex justify-between items-center">
+                      <h4 className="font-semibold">{item.title}</h4>
+                      <div className="text-amber-300 font-semibold">PKR {item.price * item.qty}</div>
+                    </div>
+                    <div className="text-slate-300 text-sm">Qty: {item.qty}</div>
+                    <div className="mt-2 flex gap-2">
+                      <button onClick={() => updateQty(item.id, -1)} className="px-2 py-1 rounded border">-</button>
+                      <button onClick={() => updateQty(item.id, +1)} className="px-2 py-1 rounded border">+</button>
+                      <button onClick={() => removeItem(item.id)} className="px-2 py-1 rounded border">Remove</button>
+                    </div>
+                  </div>
+                </li>
+              ))}
+            </ul>
+
+            <div className="mt-6 flex justify-between items-center">
+              <div className="text-slate-300">Subtotal</div>
+              <div className="font-semibold text-lg">PKR {subtotal}</div>
+            </div>
+
+            <form onSubmit={handleCheckoutSubmit} className="mt-6 space-y-3">
+              <input required value={checkoutDetails.name} onChange={(e) => setCheckoutDetails({ ...checkoutDetails, name: e.target.value })} placeholder="Full name" className="w-full p-2 rounded bg-white/5" />
+              <input required value={checkoutDetails.phone} onChange={(e) => setCheckoutDetails({ ...checkoutDetails, phone: e.target.value })} placeholder="Phone number" className="w-full p-2 rounded bg-white/5" />
+              <textarea required value={checkoutDetails.address} onChange={(e) => setCheckoutDetails({ ...checkoutDetails, address: e.target.value })} placeholder="Address / city" className="w-full p-2 rounded bg-white/5" />
+
+              <div className="flex gap-3">
+                <button type="submit" className="px-4 py-2 rounded bg-amber-400 text-slate-900 font-semibold">Place Order</button>
+                <button type="button" onClick={() => { setCart([]); setShowCart(false); }} className="px-4 py-2 rounded border">Cancel</button>
+              </div>
+            </form>
+          </div>
+        )}
+
+        <div className="mt-6 text-slate-400 text-sm">Note: This demo sends no real payment. Integrate your payment gateway or link to WhatsApp for finalization.</div>
+      </div>
+    </div>
+  )}
+
+  {/* Order placed toast */}
+  {orderPlaced && (
+    <div className="fixed bottom-6 right-6 bg-amber-400 text-slate-900 rounded px-4 py-2 shadow-lg">
+      Order placed! We'll contact you via Instagram DM.
+      <button className="ml-3 underline" onClick={() => setOrderPlaced(false)}>Close</button>
+    </div>
+  )}
+</div>
+
+); }
